@@ -1,0 +1,150 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+@font-face {
+	font-family: vibes;
+	src: url('../public/fonts/great-vibes.regular.ttf') format('truetype');
+}
+
+html, body {
+	font-family: 'Roboto', sans-serif;
+	width: 100%;
+	height: 100%;
+	background-color: #F7E8D1;
+	overflow-x: hidden;
+	position: relative;
+	z-index: -5;
+}
+
+.container {
+	width: 100%;
+	height: 100%;
+}
+
+.heading-section > div > h1 {
+	color: #FFFFFF;
+	font-size: 5vw;
+	font-weight: 400;
+	letter-spacing: -0.025em;
+	text-align: center;
+	font-family: vibes, serif;
+	text-shadow: 0 0 10px #000000;
+}
+
+.heading-section > div > h3 {
+	color: #FFFFFF;
+	font-size: 2vw;
+	font-weight: 400;
+	letter-spacing: -0.025em;
+	text-align: center;
+	font-family: vibes, serif;
+	text-shadow: 0 0 10px #000000;
+}
+
+/*.heading-section > div > h1 {
+	color: #000000;
+	font-size: 5vw;
+	font-weight: 400;
+	letter-spacing: -0.025em;
+	text-align: center;
+	font-family: vibes, serif;
+	text-shadow: 0 0 10px #F7E8D1;
+}
+
+.heading-section > div > h3 {
+	color: #000000;
+	font-size: 2vw;
+	font-weight: 400;
+	letter-spacing: -0.025em;
+	text-align: center;
+	font-family: vibes, serif;
+	text-shadow: 0 0 10px #F7E8D1;
+}*/
+
+p {
+	color: #000000;
+	font-size: 14px;
+	font-weight: 500;
+	text-align: center;
+}
+
+section {
+	position: relative;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.transparent-bg {
+	background-color: #F7E8D180;
+	padding: 5em;
+	border-radius: 1em;
+	width: 65%;
+	text-align: center;
+}
+
+.details-section > div > h2 {
+	font-family: vibes, serif;
+	font-size: 3em;
+	margin-bottom: 0.5em;
+}
+
+.details-section > div > p {
+	font-size: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.countdown-section > div > h2 {
+	font-family: vibes, serif;
+	font-size: 3em;
+}
+
+.form-section > div > h2 {
+	font-family: vibes, serif;
+	font-size: 3em;
+}
+
+.form-section > div > h3 {
+	font-family: vibes, serif;
+	font-size: 2em;
+	margin-bottom: 0.5em;
+}
+
+.show-counter {
+	padding: 0.5rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	font-weight: 400;
+	font-size: 1em;
+}
+
+.countdown {
+	margin: 0.5em;
+	line-height: 2em;
+	padding: 2em;
+	align-items: center;
+	border: 1px solid #827361;
+	border-radius: 50%;
+}
+
+.countdown > p {
+
+}
