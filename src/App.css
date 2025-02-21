@@ -133,18 +133,29 @@ section {
 	justify-content: center;
 	align-items: center;
 	font-weight: 400;
-	font-size: 1em;
+	flex-wrap: wrap;
+	align-content: stretch;
 }
 
 .countdown {
-	margin: 0.5em;
-	line-height: 2em;
-	padding: 2em;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
 	align-items: center;
+	justify-content: center;
+	margin: 1.5%;
+	padding: 1em;
+	line-height: 2em;
 	border: 1px solid #827361;
 	border-radius: 50%;
+	height: 10vw;
+	aspect-ratio: 1 / 1;
 }
 
-.countdown > p {
+.countdown-value {
+	font-size: 2em;
+}
 
+.countdown-type {
+	font-size: 1em;
 }
