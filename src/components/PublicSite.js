@@ -1,4 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
+import { toast, Bounce } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import CountdownTimer from '../CountdownTimer';
 import '../App.css';
 
@@ -10,9 +12,11 @@ const PublicSite = () => {
 	const weddingDate = new Date("2025-05-23T17:00:00+01:00");
 	const [additionalGuests, setAdditionalGuests] = useState([]);
 	const [error, setError] = useState(null);
+	const API_BASE_URL = `${window.location.origin}/api/rsvp`;
+	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	useEffect(() => {
-		fetch("http://localhost:8080/api/rsvp", {
+		fetch(`${API_BASE_URL}`, {
 			headers: {
 				'Authorization': 'Basic ' + btoa('admin:admin'),
 				'Content-Type': 'application/json'
@@ -32,6 +36,10 @@ const PublicSite = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+		if (isSubmitting) return;
+
+		setIsSubmitting(true);
+
 		const rsvpData = {
 			guestName,
 			attending,
@@ -41,7 +49,7 @@ const PublicSite = () => {
 		console.log("Submitting RSVP data: ", JSON.stringify(rsvpData, null, 2));
 
 		try {
-			const response = await fetch('http://localhost:8080/api/rsvp', {
+			const response = await fetch(`${API_BASE_URL}`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -56,9 +64,36 @@ const PublicSite = () => {
 				Message: ${response.statusMessage}`);
 			}
 
-			alert('Odgovor je uspješno poslan');
+			toast.success('Odgovor je uspješno poslan', {
+				position: "top-center",
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: false,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				transition: Bounce,
+			});
+
+			setGuestName("");
+			setAttending(true);
+			setNumberOfGuests(0);
+			setAdditionalGuests([]);
 		} catch (error) {
+			toast.error('Nešto je pošlo po zlu. Molimo Vas pokušajte ponovo.', {
+				position: "top-center",
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: false,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				transition: Bounce,
+			});
+
 			console.error("Error submitting RSVP:", error);
+		} finally {
+			setIsSubmitting(false);
 		}
 	};
 
@@ -100,15 +135,12 @@ const PublicSite = () => {
 	return (
 		<div className="container">
 			<div className="content-sections">
-				<section className="heading-section parallax-container" style={{backgroundImage: `url(/images/img1_cut.jpg)`}}>
+				<section className="section heading-section parallax-container" style={{backgroundImage: `url(/images/sdd.png)`}}>
 					<div className="bg"></div>
-					<div>
-						<h1>Marina & Igor</h1>
-						<h3>23.05.2025.</h3>
-					</div>
+
 				</section>
 
-				<section className="details-section parallax-container" style={{backgroundImage: `url(/images/img2.jpg)`}}>
+				<section className="Create selectordetails-section parallax-container" style={{backgroundImage: `url(/images/img2.jpg)`}}>
 					<div className="bg"></div>
 					<div className="transparent-bg">
 						<h2>Detalji</h2>
@@ -156,14 +188,14 @@ const PublicSite = () => {
 					</div>
 				</section>
 
-				<section className="countdown-section parallax-container" style={{backgroundImage: `url(/images/img3.jpg)`}}>
+				<section className="Create selectorcountdown-section parallax-container" style={{backgroundImage: `url(/images/img3.jpg)`}}>
 					<div className="bg"></div>
 					<div className="transparent-bg">
 						<CountdownTimer targetDate={weddingDate}/>
 					</div>
 				</section>
 
-				<section className="form-section parallax-container" style={{backgroundImage: `url(/images/4.jpg)`}}>
+				<section className="Create selectorform-section parallax-container" style={{backgroundImage: `url(/images/img1_cut.jpg)`}}>
 					<div className="bg"></div>
 					<div className="transparent-bg">
 						<h2>Potvrdite svoj dolazak</h2>
@@ -199,6 +231,7 @@ const PublicSite = () => {
 												name="guestNum"
 												onChange={handleGuestNumberChange}
 											>
+												<option value="0">0</option>
 												<option value="1">1</option>
 												<option value="2">2</option>
 												<option value="3">3</option>

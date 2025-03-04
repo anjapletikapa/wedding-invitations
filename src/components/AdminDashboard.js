@@ -7,9 +7,10 @@ const AdminDashboard = () => {
 	const [attendingCount, setAttendingCount] = useState(0);
 	const [notAttendingCount, setNotAttendingCount] = useState(0);
 	const navigate = useNavigate();
+	const API_BASE_URL = `${window.location.origin}/api/rsvp`;
 
 	useEffect(() => {
-		fetch("http://localhost:8080/api/rsvp")
+		fetch(`${API_BASE_URL}`)
 			.then((res) => res.json())
 			.then((data) => {
 				setRsvps(data);
